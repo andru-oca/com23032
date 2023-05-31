@@ -19,6 +19,7 @@ Y ENTENDER VARIAS COSAS TALES COMO VIRTUAL ENVS , PIP Y MODULARIZACION.
 - [VIRTUAL ENV ](https://virtualenv.pypa.io/en/latest/)
 - [PIP](https://pypi.org/project/pip/)
 - [MODULARIZACION (IMPORT) ](https://www.geeksforgeeks.org/python-modules/)
+- [MODULOS](https://www2.eii.uva.es/fund_inf/python/notebooks/09_Modulos/Modulos.html)
 
 - [EJERCICIOS DE PYTHON VIDEOS PARA PRACTICAR Y MIRAR](https://www.youtube.com/watch?v=9ESf-HKu3pA&list=PL38jyKCj3kacMaCET3kPiapT2mdDWwQUQ)
 ---
