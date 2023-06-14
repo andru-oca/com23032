@@ -1,131 +1,96 @@
+class Persona:
+    def __init__(self,dni,nac,fecha_nac):
+        self.dni = dni
+        self.nac = nac
+        self.fecha_nac = fecha_nac
 
-# _HERENCIA
-
-
-class _Persona_:
-    piernas:bool = True
-
-    def saludo():
+    def es_usuario(self):
         pass
 
-class Padre(_Persona_):
-    def __init__(self, nombre , color_ojos):
+
+
+
+class Premium(Persona):
+    status = "premium"
+
+    def __init__(self,ttl):
+        self.ttl = ttl
+
+    def premium(self):
+        print(f"{self.nombre}-soy un usuario premium")
+
+    def es_usuario(self):
+        print(f"soy un usuario premmium hasta {self.ttl}")
+
+
+
+class Validador:
+    def checkear(self, status):
+        if status :
+            print("es cliente actual")
+        else:
+            print("no es cliente, no me interesa serlo")
+
+class PosibleCliente:
+    status = False
+
+    def es_usuario(self):
+        if self.status:
+            print(f"soy cliente")
+        else: 
+            print("no lo soy!")
+    def clientela(self,validador:Validador):
+        validador.checkear(self.status)
+
+
+class Cliente(Premium):
+    def __init__(self, nombre,ttl):
+        Premium.__init__(self, ttl)
         self.nombre = nombre
-        self.color_ojos = color_ojos
 
+    def premium(self):
+        print(f"{self.nombre}-soy un usuario premium por {self.ttl}")
 
-    def saludo(self):
-        return "Hola!! como vas?"
-
-
-class Madre:
-    ganas_de_formar_familia = True
-
-    def __init__(self,baila:bool):
-        self.baila =baila
-
-    def cocinar_rico(self):
-        return "se cocinar excelente un pastel de papas!"
-
-class HijoMenor(Padre,Madre):
-
-    def __init__(self,nombre , color_ojos,altura,baila=False):
-        Padre.__init__(self, nombre , color_ojos)
-        Madre.__init__(self, baila)
-        self.altura = altura
-
-    def saludo(self):
-        return "YO SALUDO GRITANDO!!!"
-
-
-class Hijo(Padre,Madre):
-    __cuenta_bancaria:str
-
-    def __init__(self,nombre , color_ojos,altura,baila=False):
-        Padre.__init__(self, nombre , color_ojos)
-        Madre.__init__(self, baila)
-        self.altura = altura
+    def es_usuario(self):
+        print(f"soy un cliente, por eso soy premium igual")
 
     
-    def rebelde(self):
-        return "me gusta rbd"
+class Usuario(Premium):
 
-    # setear datos a los privados
-    def agrear_cuenta(self, cuenta_bancaria):
-        self.__cuenta_bancaria = cuenta_bancaria
-    # get datos a los privados
-    def mostrar_cuenta_bancaria(self):
-        return self.__cuenta_bancaria
+    def __init__(self,nombre,cbu,passwd):
+        self.nombre =  nombre
+        self.__cbu = cbu
+        self.passwd = passwd
 
-    
+    def get_cbu(self):
+        return self.__cbu
 
+cliente1 = Usuario(
+    "javier",
+    1892739123131987123,
+    "soy un passwd secreto"
+    )
 
-class Hija(Padre):
-    def __init__(self, nombre , color_ojos , coqueta):
-        Padre.__init__(self, nombre , color_ojos)
-        
-        self.coqueta =  coqueta
+print(cliente1.get_cbu())
 
-
-    def reparar(self):
-        return "puedo reparar todo"
-
-    def carpinteria(self):
-        return "te armo un banquito"
-        
-
-martin = Hijo("martin","azules" , 1.75)
-benja= HijoMenor("benjamin","marron", 2.0,True)
-
-cecilia = Hija("cecilia","gris",100)
-
-print("soy martin")
-print(martin.rebelde())
-print(martin.saludo())
-
-print("#"*50)
-print(martin.cocinar_rico())
-print(martin.ganas_de_formar_familia)
-print(martin.baila)
-
-print("#"*50)
-print("soy cecilia")
-print( cecilia.reparar())
-print( cecilia.carpinteria())
-print( cecilia.saludo())
+cliente1.__cbu = 98908098908
+print(cliente1.__cbu)
+print(cliente1.get_cbu())
 
 
-print("#"*50)
-martin.agrear_cuenta(1123123123)
-# print(martin.mostrar_cuenta_bancaria())
-print(martin._Hijo__cuenta_bancaria)
-
-print("#"*50)
-print(benja.saludo())
-
-print(martin.piernas)
+cliente1.premium()
+print(cliente1.status)
 
 
 
-
-# decorador
-
-
-def deco_zero(fn):
-    def analisis(a,b):
-        if b==0:
-            print("zapallo, como vas a divir por cero??")
-            return
-        return fn(a,b)
-    
-    return  analisis
+miguel = Cliente("miguel","1 mes")
+miguel.premium()
+miguel.es_usuario()
 
 
-@deco_zero
-def division(a,b):
-    print(a/b)
+manuela = PosibleCliente()
+manuela.es_usuario()
 
-
-
-division(1,10)
+obj_validador = Validador()
+manuela.clientela( obj_validador )
 
