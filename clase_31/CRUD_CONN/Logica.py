@@ -3,20 +3,21 @@ from CRUD_CONN.User import User
 class InsertUser:
 
     def insert_user(self, user:User):
+        try:
+            self.cnx.cursor()
 
-        self.cnx.cursor()
+            query = f"""
+            INSERT INTO {self.db}.{self.table_name}
+            (nombre,email,password) 
+            VALUES
+            {user.returned_string()};
+            """
+            self.cursor.execute(query)
+            self.cnx.commit()
 
-        query = f"""
-        INSERT INTO {self.db}.{self.table_name}
-        (nombre,email,password) 
-        VALUES
-        {user.returned_string()};
-        """
-        self.cursor.execute(query)
-        self.cnx.commit()
-
-        print(f"Usuario {user.nombre} ha sido cargado en la base de datos")
-
+            print(f"Usuario {user.nombre} ha sido cargado en la base de datos")
+        except Exception as e:
+            print("ERROR:\n",e)
 
 class DeleteUser:
 
